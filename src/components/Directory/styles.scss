@@ -33,7 +33,6 @@
         left: 50%;
         color: white;
         text-shadow: 2px 2px #ff0000;
-        // background: white;
         -webkit-transform: translate(-50%, -50%);
         -moz-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
@@ -41,6 +40,10 @@
         line-height: 1;
         font-weight: 400;
         text-transform: uppercase;
+
+        &:hover {
+          text-shadow: 2px 2px #faed27;
+        }
       }
     }
   }
