@@ -1,0 +1,32 @@
+.signIn {
+  display: block;
+  width: 100%;
+  max-width: 40rem;
+  box-shadow: 1px 10px 8px #888888;
+  margin: 0.5rem auto 0;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .wrap {
+    padding: 0 10px;
+    height: 100%;
+    min-height: 140px;
+    h2 {
+      font-size: 4.2rem;
+      line-height: 1;
+      font-family: "Lobster", cursive;
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .socialSignIn {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
