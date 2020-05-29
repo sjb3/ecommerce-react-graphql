@@ -1,4 +1,4 @@
-.signIn {
+.signUp {
   display: block;
   width: 100%;
   max-width: 40rem;
@@ -12,7 +12,8 @@
   .wrap {
     padding: 0 10px;
     height: 100%;
-    min-height: 140px;
+    min-height: 420px;
+
     h2 {
       font-size: 4.2rem;
       line-height: 1;
@@ -21,21 +22,12 @@
       width: 100%;
       text-align: center;
       padding: 0;
-      margin: 0 auto 3rem;
+      margin: 0 auto;
     }
 
-    .socialSignIn {
-      margin: 0 auto;
-
-      .icon {
-        cursor: pointer;
-        // margin: 1rem 3rem;
-        margin-left: 46%;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        font-size: 3.5rem;
-        color: yellow;
-      }
+    .formWrap {
+      // border: 1px solid red;
+      margin: 3rem auto;
     }
   }
 }

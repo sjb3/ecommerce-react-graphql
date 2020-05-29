@@ -1,0 +1,16 @@
+.formRow {
+  input {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+    margin: 20px auto;
+    font-size: 1.8rem;
+    line-height: 1;
+    text-align: left;
+    outline: none;
+
+    &:first-child {
+      margin-top: 10px;
+    }
+  }
+}
