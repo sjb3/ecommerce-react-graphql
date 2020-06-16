@@ -6,7 +6,7 @@ import { FormInput } from "../Forms/FormInput";
 import { auth, handleUserProfile } from "../../firebase/utils.js";
 import { AuthWrapper } from "./../AuthWrapper";
 
-const SignUpComponent = () => {
+const SignUpComponent = (props) => {
   const [displayName, setDisplayname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ const SignUpComponent = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault(0);
+    e.preventDefault();
 
     if (password !== confirmPassword) {
       const err = [`Passwords don\'t match`];

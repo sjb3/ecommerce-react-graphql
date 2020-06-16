@@ -4,12 +4,11 @@ import "./styles.scss";
 import { Buttons } from "../Forms/Buttons";
 import { auth, signInWithGoogle } from "../../firebase/utils.js";
 
-// import Tulips from "../../assets/tulips.jpg";
 import { FormInput } from "../Forms/FormInput";
 import { AuthWrapper } from "./../AuthWrapper";
 import { FaGooglePlus } from "react-icons/fa";
 
-const SignInComponent = () => {
+const SignInComponent = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
