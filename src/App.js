@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "./default.scss";
 import { auth, handleUserProfile } from "./firebase/utils";
+import { setCurrentUser } from "./redux/User/user.actions";
 
 // layouts
 import { MainLayout } from "./layouts/MainLayout";
@@ -13,47 +15,36 @@ import { Login } from "./pages/Login";
 import { Recovery } from "./pages/Recovery";
 import Registration from "./pages/Registration";
 
-const initialState = {
-  currentUser: null,
-};
+// const initialState = {
+//   currentUser: null,
+// };
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...initialState,
-    };
-  }
+class App extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     ...initialState,
+  //   };
+  // }
 
   authListener = null;
 
   componentDidMount() {
-    this.authListener = auth.onAuthStateChanged(async (userAuth) => {
-      // this part will be replaced with new util
-      // if (!userAuth) {
-      //   this.setState({
-      //     ...initialState,
-      //   });
-      // }
-      // this.setState({
-      //   currentUser: userAuth,
-      // });
+    const { setCurrentUser } = this.props;
 
+    this.authListener = auth.onAuthStateChanged(async (userAuth) => {
       // using util function
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
         userRef.onSnapshot((snapshot) => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data(),
-            },
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data(),
           });
         });
       }
-      this.setState({
-        ...initialState,
-      });
+
+      setCurrentUser(userAuth);
     });
   }
 
@@ -62,7 +53,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser } = this.props;
 
     return (
       <div className="App">
@@ -71,7 +62,7 @@ export default class App extends Component {
             exact
             path="/"
             render={() => (
-              <HomePageLayout currentUser={currentUser}>
+              <HomePageLayout>
                 <HomePage />
               </HomePageLayout>
             )}
@@ -82,7 +73,7 @@ export default class App extends Component {
               currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <Registration />
                 </MainLayout>
               )
@@ -94,7 +85,7 @@ export default class App extends Component {
               currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <Login />
                 </MainLayout>
               )
@@ -113,3 +104,12 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
