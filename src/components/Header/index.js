@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 import { auth } from "../../firebase/utils";
 import logo from "../../assets/logo.png";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = (props) => {
   const { currentUser } = props;
@@ -20,6 +21,12 @@ const Header = (props) => {
         <div className="callToActions">
           {currentUser && (
             <ul>
+              <li>
+                <Link to="/dashboard">
+                  Hello{"  "}
+                  <FaUserCircle />
+                </Link>
+              </li>
               <li>
                 <span onClick={() => auth.signOut()}>Log out</span>
               </li>

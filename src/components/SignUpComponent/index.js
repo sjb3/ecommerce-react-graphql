@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import "./styles.scss";
 import { Buttons } from "../Forms/Buttons";
 // import Pietro1 from "../../assets/pietro1.jpg";
@@ -45,6 +46,7 @@ const SignUpComponent = (props) => {
         displayName,
       });
       resetForm();
+      props.history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -97,4 +99,4 @@ const SignUpComponent = (props) => {
   );
 };
 
-export default SignUpComponent;
+export default withRouter(SignUpComponent);
