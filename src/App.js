@@ -20,13 +20,6 @@ import Registration from "./pages/Registration";
 // };
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     ...initialState,
-  //   };
-  // }
-
   authListener = null;
 
   componentDidMount() {

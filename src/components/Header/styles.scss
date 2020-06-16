@@ -54,6 +54,14 @@
           text-decoration: none;
         }
       }
+
+      span {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }
