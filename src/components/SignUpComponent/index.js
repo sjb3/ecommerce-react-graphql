@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import "./styles.scss";
 import { Buttons } from "../Forms/Buttons";
 // import Pietro1 from "../../assets/pietro1.jpg";
@@ -6,7 +7,7 @@ import { FormInput } from "../Forms/FormInput";
 import { auth, handleUserProfile } from "../../firebase/utils.js";
 import { AuthWrapper } from "./../AuthWrapper";
 
-const SignUpComponent = () => {
+const SignUpComponent = (props) => {
   const [displayName, setDisplayname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +28,7 @@ const SignUpComponent = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault(0);
+    e.preventDefault();
 
     if (password !== confirmPassword) {
       const err = [`Passwords don\'t match`];
@@ -45,6 +46,7 @@ const SignUpComponent = () => {
         displayName,
       });
       resetForm();
+      props.history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -97,4 +99,4 @@ const SignUpComponent = () => {
   );
 };
 
-export default SignUpComponent;
+export default withRouter(SignUpComponent);

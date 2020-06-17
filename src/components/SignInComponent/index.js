@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./styles.scss";
 import { Buttons } from "../Forms/Buttons";
 import { auth, signInWithGoogle } from "../../firebase/utils.js";
 
-// import Tulips from "../../assets/tulips.jpg";
 import { FormInput } from "../Forms/FormInput";
 import { AuthWrapper } from "./../AuthWrapper";
 import { FaGooglePlus } from "react-icons/fa";
 
-const SignInComponent = () => {
+const SignInComponent = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +23,7 @@ const SignInComponent = () => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       resetForm();
+      props.history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -66,4 +66,4 @@ const SignInComponent = () => {
   );
 };
 
-export default SignInComponent;
+export default withRouter(SignInComponent);
