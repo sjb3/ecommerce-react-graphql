@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "./styles.scss";
+import { signUpUser } from "../../redux/User/user.actions";
 import { Buttons } from "../Forms/Buttons";
-// import Pietro1 from "../../assets/pietro1.jpg";
 import { FormInput } from "../Forms/FormInput";
-import { auth, handleUserProfile } from "../../firebase/utils.js";
 import { AuthWrapper } from "./../AuthWrapper";
 
+const mapState = ({ user }) => ({
+  signUpSuccess: user.signUpSuccess,
+  signUpError: user.signUpError,
+});
+
 const SignUpComponent = (props) => {
+  const { signUpSuccess, signUpError } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [displayName, setDisplayname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (signUpSuccess) {
+      resetForm();
+      props.history.push("/");
+    }
+  }, [signUpSuccess]);
+
+  useEffect(() => {
+    if (Array.isArray(signUpError) && signUpError.length > 0) {
+      setErrors(signUpError);
+    }
+  }, [signUpError]);
 
   // Clean up the input boxes
   const resetForm = () => {
@@ -27,29 +47,9 @@ const SignUpComponent = (props) => {
     headline: "register",
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      const err = [`Passwords don\'t match`];
-      setErrors(err);
-      return;
-    }
-
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await handleUserProfile(user, {
-        displayName,
-      });
-      resetForm();
-      props.history.push("/");
-    } catch (err) {
-      console.error(err);
-    }
+    dispatch(signUpUser({ displayName, email, password, confirmPassword }));
   };
 
   return (
