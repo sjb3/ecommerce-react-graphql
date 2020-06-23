@@ -33,6 +33,16 @@ export const signOutUserSuccess = () => ({
   type: userTypes.SIGN_OUT_USER_SUCCESS,
 });
 
+export const signUpUserStart = (userCredentials) => ({
+  type: userTypes.SIGN_UP_USER_START,
+  payload: userCredentials,
+});
+
+export const userError = (err) => ({
+  type: userTypes.USER_ERROR,
+  payload: err,
+});
+
 // Moving try catch block in signIn component here
 // This will be taken care of by refux saga
 
@@ -48,34 +58,34 @@ export const signOutUserSuccess = () => ({
 //   }
 // };
 
-export const signUpUser = ({
-  displayName,
-  email,
-  password,
-  confirmPassword,
-}) => async (dispatch) => {
-  if (password !== confirmPassword) {
-    const err = [`Passwords don\'t match`];
-    dispatch({
-      type: userTypes.SIGN_UP_ERROR,
-      payload: err,
-    });
-    return;
-  }
+// export const signUpUser = ({
+//   displayName,
+//   email,
+//   password,
+//   confirmPassword,
+// }) => async (dispatch) => {
+//   if (password !== confirmPassword) {
+//     const err = [`Passwords don\'t match`];
+//     dispatch({
+//       type: userTypes.SIGN_UP_ERROR,
+//       payload: err,
+//     });
+//     return;
+//   }
 
-  try {
-    const { user } = await auth.createUserWithEmailAndPassword(email, password);
-    await handleUserProfile(user, {
-      displayName,
-    });
-    dispatch({
-      type: userTypes.SIGN_UP_SUCCESS,
-      payload: true,
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
+//   try {
+//     const { user } = await auth.createUserWithEmailAndPassword(email, password);
+//     await handleUserProfile(user, {
+//       displayName,
+//     });
+//     dispatch({
+//       type: userTypes.SIGN_UP_SUCCESS,
+//       payload: true,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 export const resetPassword = ({ email }) => async (dispatch) => {
   const config = {
