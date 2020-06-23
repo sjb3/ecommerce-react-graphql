@@ -1,9 +1,4 @@
 import userTypes from "./user.types";
-import {
-  auth,
-  handleUserProfile,
-  GoogleProvider,
-} from "../../firebase/utils.js";
 
 // Start is saga library naming convention
 export const emailSignInStart = (userCredentials) => ({
@@ -43,88 +38,27 @@ export const userError = (err) => ({
   payload: err,
 });
 
-// Moving try catch block in signIn component here
-// This will be taken care of by refux saga
+export const resetPasswordStart = (userCredentials) => ({
+  type: userTypes.RESET_PASSWORD_START,
+  payload: userCredentials,
+});
 
-// export const signInUser = ({ email, password }) => async (dispatch) => {
-//   try {
-//     await auth.signInWithEmailAndPassword(email, password);
-//     dispatch({
-//       type: userTypes.SIGN_IN_SUCCESS,
-//       payload: true,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
+export const resetPasswordSuccess = () => ({
+  type: userTypes.RESET_PASSWORD_SUCCESS,
+  payload: true,
+});
 
-// export const signUpUser = ({
-//   displayName,
-//   email,
-//   password,
-//   confirmPassword,
-// }) => async (dispatch) => {
-//   if (password !== confirmPassword) {
-//     const err = [`Passwords don\'t match`];
-//     dispatch({
-//       type: userTypes.SIGN_UP_ERROR,
-//       payload: err,
-//     });
-//     return;
-//   }
+export const resetUserState = () => ({
+  type: userTypes.RESET_USER_STATE,
+});
 
-//   try {
-//     const { user } = await auth.createUserWithEmailAndPassword(email, password);
-//     await handleUserProfile(user, {
-//       displayName,
-//     });
-//     dispatch({
-//       type: userTypes.SIGN_UP_SUCCESS,
-//       payload: true,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
+export const googleSignInStart = () => ({
+  type: userTypes.GOOGLE_SIGN_IN_START,
+});
 
-export const resetPassword = ({ email }) => async (dispatch) => {
-  const config = {
-    url: "http://localhost:3000/login",
-  };
+// export const resetPassword = ({ email }) => async (dispatch) => {};
 
-  try {
-    await auth
-      .sendPasswordResetEmail(email, config)
-      .then(() => {
-        dispatch({
-          type: userTypes.RESET_PASSWORD_SUCCESS,
-          payload: true,
-        });
-      })
-      .catch(() => {
-        const err = ["Email not found.  Please try again."];
-        dispatch({
-          type: userTypes.RESET_PASSWORD_ERROR,
-          payload: err,
-        });
-      });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const signInWithGoogle = () => async (dispatch) => {
-  try {
-    await auth.signInWithPopup(GoogleProvider).then(() => {
-      dispatch({
-        type: userTypes.SIGN_IN_SUCCESS,
-        payload: true,
-      });
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
+// export const signInWithGoogle = () => async (dispatch) => {};
 
 export const resetAllAuthForms = () => ({
   type: userTypes.RESET_AUTH_FORMS,

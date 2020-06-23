@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./styles.scss";
 import { signUpUserStart } from "../../redux/User/user.actions";
 import { Buttons } from "../Forms/Buttons";
@@ -13,8 +13,9 @@ const mapState = ({ user }) => ({
 });
 
 const SignUpComponent = (props) => {
-  const { currentUser, userErr } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, userErr } = useSelector(mapState);
   const [displayName, setDisplayname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +26,7 @@ const SignUpComponent = (props) => {
     if (currentUser) {
       resetForm();
       // dispatch(resetAllAuthForms());
-      props.history.push("/");
+      history.push("/");
     }
   }, [currentUser]);
 
@@ -102,4 +103,5 @@ const SignUpComponent = (props) => {
   );
 };
 
-export default withRouter(SignUpComponent);
+// export default withRouter(SignUpComponent);
+export default SignUpComponent;

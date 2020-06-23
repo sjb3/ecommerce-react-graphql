@@ -3,6 +3,9 @@ import userTypes from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   userErr: [],
+  resetPasswordSuccess: false,
+  // Update with sage below
+
   // signInSuccess: false,
   // signUpSuccess: false,
   // signUpError: [],
@@ -51,21 +54,30 @@ const userReducer = (state = INITIAL_STATE, action) => {
     //     resetPasswordSuccess: false,
     //     resetPasswordError: [],
     //   };
+
+    // Update with saga below
     case userTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
         currentUser: action.payload,
         userErr: [],
       };
-    case userTypes.SIGN_OUT_USER_SUCCESS:
+
+    case userTypes.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        ...INITIAL_STATE,
+        resetPasswordSuccess: action.payload,
       };
     case userTypes.USER_ERROR:
       return {
         ...state,
         userErr: action.payload,
+      };
+    case userTypes.RESET_USER_STATE:
+    case userTypes.SIGN_OUT_USER_SUCCESS:
+      return {
+        ...state,
+        ...INITIAL_STATE,
       };
     default:
       return state;
