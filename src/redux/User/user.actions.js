@@ -5,23 +5,48 @@ import {
   GoogleProvider,
 } from "../../firebase/utils.js";
 
+// Start is saga library naming convention
+export const emailSignInStart = (userCredentials) => ({
+  type: userTypes.EMAIL_SIGN_IN_START,
+  payload: userCredentials,
+});
+
+export const signInSuccess = (user) => ({
+  type: userTypes.SIGN_IN_SUCCESS,
+  payload: user,
+});
+
 export const setCurrentUser = (user) => ({
   type: userTypes.SET_CURRENT_USER,
   payload: user,
 });
 
+export const checkUserSession = () => ({
+  type: userTypes.CHECK_USER_SESSION,
+});
+
+export const signOutUserStart = () => ({
+  type: userTypes.SIGN_OUT_USER_START,
+});
+
+export const signOutUserSuccess = () => ({
+  type: userTypes.SIGN_OUT_USER_SUCCESS,
+});
+
 // Moving try catch block in signIn component here
-export const signInUser = ({ email, password }) => async (dispatch) => {
-  try {
-    await auth.signInWithEmailAndPassword(email, password);
-    dispatch({
-      type: userTypes.SIGN_IN_SUCCESS,
-      payload: true,
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
+// This will be taken care of by refux saga
+
+// export const signInUser = ({ email, password }) => async (dispatch) => {
+//   try {
+//     await auth.signInWithEmailAndPassword(email, password);
+//     dispatch({
+//       type: userTypes.SIGN_IN_SUCCESS,
+//       payload: true,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 export const signUpUser = ({
   displayName,
