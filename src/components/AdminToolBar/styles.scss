@@ -1,0 +1,48 @@
+.adminToolBar {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 10px;
+  background: #f953c6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #b91d73,
+    #f953c6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    float: right;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: bold;
+      line-height: 1;
+      padding: 10px;
+      color: white;
+      transition: all 0.4 ease-in-out;
+
+      &:hover {
+        color: black;
+        transition: all 0.4 ease-in-out;
+      }
+    }
+  }
+}
