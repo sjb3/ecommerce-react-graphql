@@ -22,6 +22,8 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
   if (!snapshot.exists) {
     const { displayName, email } = userAuth;
     const timestamp = new Date();
+    // Create admin user role
+    const userRoles = ["user"];
 
     try {
       // create new document with set()
@@ -29,6 +31,7 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
         displayName,
         email,
         createAt: timestamp,
+        userRoles,
         ...additionalData,
       });
     } catch (err) {

@@ -1,24 +1,23 @@
-// creating custom hooks
-
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { checkUserIsAdmin } from "../Utils";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
-const useAuth = (props) => {
-  const { currentUser } = useSelector(mapState);
+const useAdminAuth = (props) => {
   const history = useHistory();
+  const { currentUser } = useSelector(mapState);
 
   useEffect(() => {
     // if null
-    if (!currentUser) {
+    if (!checkUserIsAdmin(currentUser)) {
       history.push("/login");
     }
   }, [currentUser]);
   return currentUser;
 };
 
-export default useAuth;
+export default useAdminAuth;
