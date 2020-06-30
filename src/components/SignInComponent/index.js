@@ -6,9 +6,9 @@ import {
   emailSignInStart,
   googleSignInStart,
 } from "../../redux/User/user.actions";
-import { Buttons } from "../Forms/Buttons";
+import Buttons from "../Forms/Buttons";
 
-import { FormInput } from "../Forms/FormInput";
+import FormInput from "../Forms/FormInput";
 import { AuthWrapper } from "./../AuthWrapper";
 import { FaGooglePlus } from "react-icons/fa";
 
