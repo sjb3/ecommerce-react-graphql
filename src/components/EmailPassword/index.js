@@ -6,9 +6,9 @@ import {
 } from "../../redux/User/user.actions";
 import { useHistory } from "react-router-dom"; // Give access to history
 import "./styles.scss";
-import { FormInput } from "../Forms/FormInput";
+import FormInput from "../Forms/FormInput";
 import { AuthWrapper } from "./../AuthWrapper";
-import { Buttons } from "../Forms/Buttons";
+import Buttons from "../Forms/Buttons";
 import { auth } from "../../firebase/utils.js";
 
 const mapState = ({ user }) => ({

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./styles.scss";
 import { signUpUserStart } from "../../redux/User/user.actions";
-import { Buttons } from "../Forms/Buttons";
-import { FormInput } from "../Forms/FormInput";
+import Buttons from "../Forms/Buttons";
+import FormInput from "../Forms/FormInput";
 import { AuthWrapper } from "./../AuthWrapper";
 
 const mapState = ({ user }) => ({

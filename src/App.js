@@ -1,28 +1,30 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
-import { Route, Switch } from "react-router-dom";
-import "./default.scss";
-// import { auth, handleUserProfile } from "./firebase/utils";
+import { Switch, Route } from "react-router-dom";
 import { checkUserSession } from "./redux/User/user.actions";
 
 // components
 import { AdminToolBar } from "./components/AdminToolBar";
+
 // hoc
 import WithAuth from "./hoc/withAuth";
 import WithAdminAuth from "./hoc/withAdminAuth";
 
 // layouts
 import { MainLayout } from "./layouts/MainLayout";
-import { HomePageLayout } from "./layouts/HomePageLayout";
+import { HomepageLayout } from "./layouts/HomepageLayout";
+import { AdminLayout } from "./layouts/AdminLayout";
+import { DashboardLayout } from "./layouts/DashboardLayout";
 
 // pages
 import { HomePage } from "./pages/HomePage";
+import Registration from "./pages/Registration";
 import { Login } from "./pages/Login";
 import { Recovery } from "./pages/Recovery";
-import Registration from "./pages/Registration";
 import { Dashboard } from "./pages/Dashboard";
-import { Admin } from "./pages/Admin";
+import Admin from "./pages/Admin";
+
+import "./default.scss";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -39,9 +41,9 @@ const App = (props) => {
           exact
           path="/"
           render={() => (
-            <HomePageLayout>
+            <HomepageLayout>
               <HomePage />
-            </HomePageLayout>
+            </HomepageLayout>
           )}
         />
         <Route
@@ -72,9 +74,9 @@ const App = (props) => {
           path="/dashboard"
           render={() => (
             <WithAuth>
-              <MainLayout>
+              <DashboardLayout>
                 <Dashboard />
-              </MainLayout>
+              </DashboardLayout>
             </WithAuth>
           )}
         />
@@ -82,9 +84,9 @@ const App = (props) => {
           path="/admin"
           render={() => (
             <WithAdminAuth>
-              <MainLayout>
+              <AdminLayout>
                 <Admin />
-              </MainLayout>
+              </AdminLayout>
             </WithAdminAuth>
           )}
         />
